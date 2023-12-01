@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <el-container class="main">
+    <!-- 헤더 -->
+    <el-header><BasicHeader /></el-header>
+    <!--메인 -->
+    <el-container>
+      <el-aside><BasicAside /></el-aside>
+      <el-container>
+        <el-main><slot></slot></el-main>
+      </el-container>
+    </el-container>
+    <!-- 푸터 -->
+  </el-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BasicHeader from "./components/layouts/BasicHeader.vue";
+import BasicAside from "./components/layouts/BasicAside.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { BasicHeader, BasicAside },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.el-header {
+  background: linear-gradient(to right, #373b44, #4286f4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main {
+  height: 100%;
 }
 </style>
