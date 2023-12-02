@@ -1,16 +1,18 @@
 <template>
-  <el-container class="main">
-    <!-- 헤더 -->
-    <el-header><BasicHeader /></el-header>
-    <!--메인 -->
+  <div>
     <el-container>
-      <el-aside><BasicAside /></el-aside>
+      <!-- 헤더 -->
+      <el-header><BasicHeader /></el-header>
       <el-container>
-        <el-main><slot></slot></el-main>
+        <!-- 사이드 -->
+        <el-aside width="200px"><BasicAside /></el-aside>
+        <el-container class="main-container">
+          <el-main> <router-view></router-view> </el-main>
+          <el-footer>Footer</el-footer>
+        </el-container>
       </el-container>
     </el-container>
-    <!-- 푸터 -->
-  </el-container>
+  </div>
 </template>
 
 <script>
@@ -23,7 +25,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-header {
   background: linear-gradient(to right, #373b44, #4286f4);
   color: #fff;
@@ -31,7 +33,12 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.main {
-  height: 100%;
+.el-container {
+  height: 100vh;
+}
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

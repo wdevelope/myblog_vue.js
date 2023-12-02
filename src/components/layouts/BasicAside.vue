@@ -1,12 +1,13 @@
 <template>
-  <el-aside width="200px">
+  <el-aside width="200px" class="main-aside">
     <el-scrollbar>
       <el-menu :default-openeds="[]">
-        <el-sub-menu index="1">
+        <el-menu-item index="1">
           <template #title>
-            <el-icon><message /></el-icon>Home
+            <el-icon><message /></el-icon>
+            <router-link to="/home">Home</router-link>
           </template>
-        </el-sub-menu>
+        </el-menu-item>
 
         <el-sub-menu index="2">
           <template #title>
@@ -44,11 +45,11 @@
           </el-sub-menu>
         </el-sub-menu>
 
-        <el-sub-menu index="4">
+        <el-menu-item index="4">
           <template #title>
             <el-icon><setting /></el-icon>Visitor
           </template>
-        </el-sub-menu>
+        </el-menu-item>
       </el-menu>
     </el-scrollbar>
   </el-aside>
@@ -57,8 +58,9 @@
 <script>
 export default {
   name: "BasicAside",
+  methods: {},
 };
 </script>
 
-<style>
+<style scoped>
 </style>
