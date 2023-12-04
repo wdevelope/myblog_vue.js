@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin" class="login-form">
+  <form @submit.prevent="login" class="login-form">
     <h1>Login</h1>
 
     <input
@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
+    async login() {
       try {
         const response = await axios.post(
           `${process.env.VUE_APP_BACKEND_URL}/api/user/login`,

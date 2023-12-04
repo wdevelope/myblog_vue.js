@@ -1,5 +1,7 @@
 <template>
-  <h1>w-life daily</h1>
+  <router-link to="/home" class="custom-router-link">
+    <h1>w-life daily</h1>
+  </router-link>
   <div>
     <router-link v-if="!isLoggedIn" to="/login">
       <el-button type="Login" round>Login</el-button>
@@ -70,4 +72,13 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: white;
+}
+h1:hover {
+  scale: 1.1;
+}
+.custom-router-link {
+  text-decoration: none;
+}
 </style>

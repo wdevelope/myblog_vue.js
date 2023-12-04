@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin">
+  <form @submit.prevent="register">
     <h1>Register</h1>
 
     <input
@@ -52,17 +52,17 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
+    async register() {
       try {
         const response = await axios.post(
-          `${process.env.VUE_APP_BACKEND_URL}/api/user/login`,
+          `${process.env.VUE_APP_BACKEND_URL}/api/user/register`,
           this.registerInfo,
           {
             withCredentials: true,
           }
         );
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           alert("회원가입에 성공했습니다.");
           this.$router.push("/login");
         } else {
