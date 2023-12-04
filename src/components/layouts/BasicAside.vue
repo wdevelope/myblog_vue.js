@@ -1,6 +1,7 @@
 <template>
   <el-aside width="200px" class="main-aside">
     <el-scrollbar>
+      <!-- 홈 -->
       <el-menu :default-openeds="[]">
         <el-menu-item index="1">
           <template #title>
@@ -8,7 +9,7 @@
             <router-link to="/home">Home</router-link>
           </template>
         </el-menu-item>
-
+        <!-- 게시판 -->
         <el-sub-menu index="2">
           <template #title>
             <el-icon><icon-menu /></el-icon>Category 1
@@ -27,27 +28,12 @@
           </el-sub-menu>
         </el-sub-menu>
 
-        <el-sub-menu index="3">
+        <!-- 방명록 -->
+        <el-menu-item index="3">
           <template #title>
-            <el-icon><setting /></el-icon>Category 2
-          </template>
-          <el-menu-item-group>
-            <template #title>Group 1</template>
-            <el-menu-item index="3-1">Option 1</el-menu-item>
-            <el-menu-item index="3-2">Option 2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group 2">
-            <el-menu-item index="3-3">Option 3</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="3-4">
-            <template #title>Option 4</template>
-            <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-          </el-sub-menu>
-        </el-sub-menu>
-
-        <el-menu-item index="4">
-          <template #title>
-            <el-icon><setting /></el-icon>Visitor
+            <router-link to="/visitor">
+              <el-icon><setting /></el-icon>Visitor
+            </router-link>
           </template>
         </el-menu-item>
       </el-menu>

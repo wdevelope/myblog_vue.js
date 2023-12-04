@@ -35,14 +35,14 @@ export default {
     // 로그인 상태 확인 (쿠키)
     async checkLoginStatus() {
       try {
-        const response = await axios.get(
+        await axios.get(
           `${process.env.VUE_APP_BACKEND_URL}/api/user/check`,
           // 쿠키 사용 설정
           {
             withCredentials: true,
           }
         );
-        this.isLoggedIn = response.data.isLoggedIn;
+        this.$store.dispatch("login");
       } catch (error) {
         console.error("Error checking login status", error);
       }
