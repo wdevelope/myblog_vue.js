@@ -54,17 +54,23 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        await axios.post(
-          "http://localhost:3000/api/user/login",
-          this.registerInfo
+        const response = await axios.post(
+          `${process.env.VUE_APP_BACKEND_URL}/api/user/login`,
+          this.registerInfo,
+          {
+            withCredentials: true,
+          }
         );
 
-        // 로그인 성공 처리
-
-        // 예: 토큰 저장, 홈페이지로 리디렉션 등
+        if (response.status === 200) {
+          alert("회원가입에 성공했습니다.");
+          this.$router.push("/login");
+        } else {
+          alert(response.data.errorMessage || "회원가입에 실패했습니다.");
+        }
       } catch (error) {
-        // 에러 처리
-        // 예: 사용자에게 에러 메시지 표시
+        alert("회원가입이 실패했습니다.");
+        console.error(error, "알 수 없는 에러 발생");
       }
     },
   },

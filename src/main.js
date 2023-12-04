@@ -11,9 +11,13 @@ import 'element-plus/dist/index.css';
 // global css
 import '@/styles/main.css';
 
+// vues store import
+import store from './store';
+
 const app = createApp(App);
 
 app.use(ElementPlus);
 app.use(router);
+app.use(store);
 
 app.mount('#app');
