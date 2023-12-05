@@ -1,7 +1,9 @@
 <template>
-  <h2>방명록</h2>
-  <el-button type="primary" @click="goToWritePage">글쓰기</el-button>
-  <el-table :data="visitors" class="table-responsive" style="width: 1000px">
+  <div class="visitorTitle">
+    <h2>방명록</h2>
+    <el-button type="primary" @click="goToWritePage">글쓰기</el-button>
+  </div>
+  <el-table :data="visitors" class="table-responsive" style="width: 100%">
     <el-table-column prop="index" label="번호" width="80">
       <template #default="{ $index }">
         {{ visitors.length - $index }}
@@ -66,8 +68,13 @@ h2 {
   margin-bottom: 30px;
 }
 .pagination {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+}
+
+.visitorTitle {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

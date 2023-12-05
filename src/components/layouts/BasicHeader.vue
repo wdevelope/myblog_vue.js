@@ -81,4 +81,8 @@ h1:hover {
 .custom-router-link {
   text-decoration: none;
 }
+
+.el-button {
+  margin-left: 5px;
+}
 </style>

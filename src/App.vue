@@ -34,7 +34,8 @@ export default {
   justify-content: space-between;
 }
 
-.el-scrollbar {
-  height: 1000px;
+.el-main {
+  display: flex;
+  text-align: center;
 }
 </style>

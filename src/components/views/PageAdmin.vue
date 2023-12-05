@@ -1,9 +1,14 @@
 <template>
-  <h2>관리자 페이지</h2>
-
+  <div class="adminTitle">
+    <h2>관리자 페이지</h2>
+    <el-tag class="ml-2" type="warning">admin</el-tag>
+  </div>
   <!-- 카테고리 생성 폼 -->
-  <el-form @submit.prevent="createCategory">
+  <div class="adminTitle">
     <h3>카테고리 생성</h3>
+    <el-button type="primary" native-type="submit">카테고리 생성</el-button>
+  </div>
+  <el-form @submit.prevent="createCategory">
     <el-form-item label="카테고리 이름">
       <el-input
         v-model="categoryForm.name"
@@ -17,12 +22,14 @@
         placeholder="위치"
       ></el-input-number>
     </el-form-item>
-    <el-button type="primary" native-type="submit">카테고리 생성</el-button>
   </el-form>
   <br />
   <!-- 서브카테고리 생성 폼 -->
-  <el-form @submit.prevent="createSubCategory">
+  <div class="adminTitle">
     <h3>서브 카테고리 생성</h3>
+    <el-button type="primary" native-type="submit">서브카테고리 생성</el-button>
+  </div>
+  <el-form @submit.prevent="createSubCategory">
     <el-form-item label="카테고리 이름">
       <el-input
         v-model="subCategoryForm.categoryName"
@@ -42,7 +49,6 @@
         placeholder="위치"
       ></el-input-number>
     </el-form-item>
-    <el-button type="primary" native-type="submit">서브카테고리 생성</el-button>
   </el-form>
 </template>
   
@@ -104,6 +110,19 @@ export default {
   <style scoped>
 h3 {
   margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+.adminTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.el-input {
+  margin: 10px;
 }
 </style>
   

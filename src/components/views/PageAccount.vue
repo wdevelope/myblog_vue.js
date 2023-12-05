@@ -1,13 +1,13 @@
 <template>
-  <h2>유저 정보</h2>
-  <div>
-    <span>name: {{ name }}</span>
+  <div class="accountTitle">
+    <h2>유저 정보</h2>
     <el-tag class="ml-4" type="warning">{{ status }}</el-tag>
-    <p>email: {{ email }}</p>
-    <el-button v-if="status === 'admin'" type="primary" @click="goToAdminPage"
-      >관리자 페이지</el-button
-    >
   </div>
+  <span>name: {{ name }}</span>
+  <p>email: {{ email }}</p>
+  <el-button v-if="status === 'admin'" type="primary" @click="goToAdminPage"
+    >관리자 페이지</el-button
+  >
 </template>
 
 <script>
@@ -45,8 +45,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h2 {
   margin-bottom: 20px;
+}
+
+.el-button {
+  margin-top: 20px;
+}
+
+.accountTitle {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
