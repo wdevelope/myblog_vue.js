@@ -3,36 +3,44 @@
     <el-scrollbar>
       <!-- 홈 -->
       <el-menu :default-openeds="[]">
-        <el-menu-item index="1">
+        <el-menu-item index="home">
           <template #title>
-            <el-icon><message /></el-icon>
-            <router-link to="/home">Home</router-link>
+            <el-icon><HomeFilled /></el-icon>
+            <router-link to="/home" class="custom-router-link"
+              >Home</router-link
+            >
           </template>
         </el-menu-item>
-        <!-- 게시판 -->
-        <el-sub-menu index="2">
+
+        <!-- 동적으로 생성되는 카테고리 -->
+        <el-sub-menu
+          v-for="category in categories"
+          :key="category.id"
+          :index="category.id.toString()"
+        >
           <template #title>
-            <el-icon><icon-menu /></el-icon>Category 1
+            <el-icon><Collection /></el-icon>{{ category.name }}
           </template>
-          <el-menu-item-group>
-            <template #title>Group 1</template>
-            <el-menu-item index="2-1">Option 1</el-menu-item>
-            <el-menu-item index="2-2">Option 2</el-menu-item>
+
+          <!-- 서브카테고리 렌더링 -->
+          <el-menu-item-group
+            v-for="subCategory in subCategories[category.id]"
+            :key="subCategory.id"
+          >
+            <el-menu-item
+              :index="subCategory.id.toString()"
+              @click="goToSubCategoryBoard(subCategory.id)"
+            >
+              {{ subCategory.name }}
+            </el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group 2">
-            <el-menu-item index="2-3">Option 3</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="2-4">
-            <template #title>Option 4</template>
-            <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-          </el-sub-menu>
         </el-sub-menu>
 
         <!-- 방명록 -->
         <el-menu-item index="3">
           <template #title>
-            <router-link to="/visitor">
-              <el-icon><setting /></el-icon>Visitor
+            <router-link to="/visitor" class="custom-router-link">
+              <el-icon><Avatar /></el-icon>Visitor
             </router-link>
           </template>
         </el-menu-item>
@@ -42,11 +50,58 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "BasicAside",
-  methods: {},
+  data() {
+    return {
+      categories: [],
+      subCategories: {},
+    };
+  },
+  created() {
+    this.fetchCategories();
+  },
+  methods: {
+    // api 요청 : 카테고리 가져오기
+    async fetchCategories() {
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_BACKEND_URL}/api/category`
+        );
+        this.categories = response.data.sort((a, b) => a.position - b.position);
+
+        await this.fetchSubCategories();
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    },
+    // api 요청 : 서브 카테고리 가져오기
+    async fetchSubCategories() {
+      try {
+        for (let category of this.categories) {
+          const response = await axios.get(
+            `${process.env.VUE_APP_BACKEND_URL}/api/subCategory/${category.id}`
+          );
+
+          this.subCategories[category.id] = response.data.sort(
+            (a, b) => a.position - b.position
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching subcategories", error);
+      }
+    },
+    goToSubCategoryBoard(subCategoryId) {
+      this.$router.push(`/subCategory/${subCategoryId}`);
+    },
+  },
 };
 </script>
 
 <style scoped>
+.custom-router-link {
+  text-decoration: none;
+}
 </style>
