@@ -30,6 +30,7 @@
 import axios from "axios";
 
 export default {
+  name: "PageVisitorDeatil",
   data() {
     return {
       title: "",

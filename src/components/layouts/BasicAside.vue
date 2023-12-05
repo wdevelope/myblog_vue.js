@@ -1,5 +1,5 @@
 <template>
-  <el-aside width="200px" class="main-aside">
+  <el-aside width="200px">
     <el-scrollbar>
       <!-- 홈 -->
       <el-menu :default-openeds="[]">

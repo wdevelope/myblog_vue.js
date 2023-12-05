@@ -7,8 +7,8 @@
         <!-- 사이드 -->
         <el-aside width="200px"><BasicAside /></el-aside>
         <el-container class="main-container">
+          <!-- 메인 -->
           <el-main> <router-view></router-view> </el-main>
-          <el-footer>Footer</el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .el-header {
   background: linear-gradient(to right, #373b44, #4286f4);
   color: #fff;
@@ -33,12 +33,8 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.el-container {
-  height: 100vh;
-}
-.main-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.el-scrollbar {
+  height: 1000px;
 }
 </style>

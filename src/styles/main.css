@@ -3,9 +3,8 @@
   padding: 0;
 }
 html,
-body {
-  height: 100%;
-}
-#app {
+body,
+#app,
+.el-container {
   height: 100%;
 }

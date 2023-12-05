@@ -5,6 +5,8 @@ import PageRegister from '../components/views/PageRegister.vue';
 import PageVisitor from '../components/views/PageVisitor.vue';
 import PageVisitorDeatil from '../components/views/PageVisitorDeatil.vue';
 import PageVisitorWrite from '../components/views/PageVisitorWrite.vue';
+import PageAccount from '../components/views/PageAccount.vue';
+import PageAdmin from '../components/views/PageAdmin.vue';
 
 const routes = [
   {
@@ -36,6 +38,16 @@ const routes = [
     path: '/visitor/write',
     name: 'PageVisitorWrite',
     component: PageVisitorWrite,
+  },
+  {
+    path: '/account',
+    name: 'PageAccount',
+    component: PageAccount,
+  },
+  {
+    path: '/admin',
+    name: 'PageAdmin',
+    component: PageAdmin,
   },
 ];
 

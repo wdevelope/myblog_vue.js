@@ -38,6 +38,7 @@
 import axios from "axios";
 
 export default {
+  name: "PageVisitorWrite",
   data() {
     return {
       visitors: {
@@ -72,4 +73,5 @@ export default {
   },
 };
 </script>
+<style></style>
   
