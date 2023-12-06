@@ -71,7 +71,8 @@ export default {
       return date.toLocaleDateString();
     },
     goToWritePage() {
-      this.$router.push("/visitor/write"); // 글쓰기 페이지로 이동
+      const subCategoryId = this.$route.params.subCategoryId;
+      this.$router.push({ path: "/board/write", query: { subCategoryId } });
     },
   },
 };

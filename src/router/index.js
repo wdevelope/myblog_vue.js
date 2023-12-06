@@ -9,6 +9,7 @@ import PageAccount from '../components/views/PageAccount.vue';
 import PageAdmin from '../components/views/PageAdmin.vue';
 import PageBoard from '../components/views/PageBoard.vue';
 import PageBoardDetail from '../components/views/PageBoardDetail.vue';
+import PageBoardWrite from '../components/views/PageBoardWrite.vue';
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: '/post/:postId',
     name: 'PageBoardDetail',
     component: PageBoardDetail,
+  },
+  {
+    path: '/board/write',
+    name: 'PageBoardWrite',
+    component: PageBoardWrite,
   },
 ];
 
