@@ -1,6 +1,6 @@
 <template>
   <div class="boardTitle">
-    <h2>게시판</h2>
+    <h2>{{ subCategoryName }}</h2>
     <el-button type="primary" @click="goToWritePage">글쓰기</el-button>
   </div>
 
@@ -50,6 +50,7 @@ export default {
         totalCount: 0,
         pageSize: 15,
       },
+      subCategoryName: "",
     };
   },
   created() {
@@ -78,7 +79,7 @@ export default {
         const response = await axios.get(
           `${process.env.VUE_APP_BACKEND_URL}/api/post?page=${pageFromUrl}&subCategoryId=${subCategoryId}`
         );
-
+        this.subCategoryName = response.data.subCategory.name;
         this.posts = response.data.posts;
         this.meta = response.data.meta;
         this.totalCount = response.data.meta.totalCount;
