@@ -7,6 +7,8 @@ import PageVisitorDeatil from '../components/views/PageVisitorDeatil.vue';
 import PageVisitorWrite from '../components/views/PageVisitorWrite.vue';
 import PageAccount from '../components/views/PageAccount.vue';
 import PageAdmin from '../components/views/PageAdmin.vue';
+import PageBoard from '../components/views/PageBoard.vue';
+import PageBoardDetail from '../components/views/PageBoardDetail.vue';
 
 const routes = [
   {
@@ -48,6 +50,16 @@ const routes = [
     path: '/admin',
     name: 'PageAdmin',
     component: PageAdmin,
+  },
+  {
+    path: '/subCategory/:subCategoryId',
+    name: 'PageBoard',
+    component: PageBoard,
+  },
+  {
+    path: '/post/:postId',
+    name: 'PageBoardDetail',
+    component: PageBoardDetail,
   },
 ];
 

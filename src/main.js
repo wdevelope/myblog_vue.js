@@ -14,10 +14,17 @@ import '@/styles/main.css';
 // vues store import
 import store from './store';
 
+// Element Plus icon
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+
 const app = createApp(App);
 
 app.use(ElementPlus);
 app.use(router);
 app.use(store);
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
 
 app.mount('#app');

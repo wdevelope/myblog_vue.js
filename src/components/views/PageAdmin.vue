@@ -6,7 +6,6 @@
   <!-- 카테고리 생성 폼 -->
   <div class="adminTitle">
     <h3>카테고리 생성</h3>
-    <el-button type="primary" native-type="submit">카테고리 생성</el-button>
   </div>
   <el-form @submit.prevent="createCategory">
     <el-form-item label="카테고리 이름">
@@ -22,12 +21,12 @@
         placeholder="위치"
       ></el-input-number>
     </el-form-item>
+    <el-button type="primary" native-type="submit">카테고리 생성</el-button>
   </el-form>
   <br />
   <!-- 서브카테고리 생성 폼 -->
   <div class="adminTitle">
     <h3>서브 카테고리 생성</h3>
-    <el-button type="primary" native-type="submit">서브카테고리 생성</el-button>
   </div>
   <el-form @submit.prevent="createSubCategory">
     <el-form-item label="카테고리 이름">
@@ -49,6 +48,7 @@
         placeholder="위치"
       ></el-input-number>
     </el-form-item>
+    <el-button type="primary" native-type="submit">서브카테고리 생성</el-button>
   </el-form>
 </template>
   
