@@ -60,13 +60,19 @@ export default {
           }
         );
         if (response.status === 201) {
-          alert("게시글 작성에 성공했습니다.");
+          alert("방명록 작성에 성공했습니다.");
           this.$router.push("/visitor");
-        } else {
-          alert(response.data.errorMessage || "게시글 작성에 실패했습니다.");
         }
       } catch (error) {
-        alert("게시글 작성에 실패했습니다.");
+        let errorMessage = "방명록 작성에 실패했습니다.";
+
+        if (error.response && error.response.data) {
+          errorMessage = Array.isArray(error.response.data.errorMessage)
+            ? error.response.data.errorMessage.join("\n")
+            : error.response.data.errorMessage || errorMessage;
+        }
+
+        alert(errorMessage);
         console.error(error, "알 수 없는 에러 발생");
       }
     },
