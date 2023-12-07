@@ -1,13 +1,15 @@
 <template>
-  <div class="accountTitle">
+  <div class="account-box">
     <h2>유저 정보</h2>
-    <el-tag class="ml-4" type="warning">{{ status }}</el-tag>
+    <span
+      >name: {{ name
+      }}<el-tag class="ml-4" type="warning">{{ status }}</el-tag></span
+    >
+    <span>email: {{ email }}</span>
+    <el-button v-if="status === 'admin'" type="primary" @click="goToAdminPage"
+      >관리자 페이지</el-button
+    >
   </div>
-  <span>name: {{ name }}</span>
-  <p>email: {{ email }}</p>
-  <el-button v-if="status === 'admin'" type="primary" @click="goToAdminPage"
-    >관리자 페이지</el-button
-  >
 </template>
 
 <script>
@@ -47,15 +49,28 @@ export default {
 
 <style scoped>
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .el-button {
   margin-top: 20px;
 }
 
-.accountTitle {
+.account-box {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 10px;
+}
+
+.account-box > span {
+  font-size: 1.2rem;
+  color: rgb(63, 63, 63);
+}
+
+.el-tag {
+  margin-left: 5px;
 }
 </style>

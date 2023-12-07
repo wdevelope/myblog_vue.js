@@ -1,17 +1,10 @@
-<template>
+<template class="board-detail-box">
+  <span class="board-title"> {{ title }} </span>
   <el-page-header @back="goBack" :icon="ArrowLeft">
     <template #content>
       <div class="flex items-center">
-        <span class="text-large"> {{ title }} </span>
-        <el-avatar
-          :size="32"
-          class="mr-3"
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        />
-        <span class="mr-2" style="color: var(--el-text-color-regular)">
-          {{ author }}
-        </span>
         <el-tag>작성자</el-tag>
+        <span> {{ author }} | {{ createdAt }}</span>
       </div>
     </template>
     <template #extra>
@@ -19,7 +12,7 @@
         <el-button type="primary" class="ml-2">Edit</el-button>
       </div>
     </template>
-    <div>
+    <div class="board-content">
       {{ content }}
     </div>
   </el-page-header>
@@ -36,6 +29,7 @@ export default {
       title: "",
       content: "",
       author: "",
+      createdAt: "",
     };
   },
   methods: {
@@ -51,6 +45,8 @@ export default {
       );
       this.title = response.data.title;
       this.content = response.data.content;
+      const date = new Date(response.data.createdAt);
+      this.createdAt = date.toLocaleDateString();
       this.author = response.data.user.name;
     } catch (error) {
       console.error("Error fetching visitor detail", error);
@@ -59,8 +55,19 @@ export default {
 };
 </script>
   <style scoped>
-.text-large {
-  margin-right: 100px;
-  margin-left: 50px;
+.board-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.board-content {
+  margin: 30px;
+}
+
+.el-page-header {
+  margin-top: 20px;
+}
+
+.el-tag {
+  margin-right: 5px;
 }
 </style>

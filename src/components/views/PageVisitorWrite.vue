@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent="writeVisitor">
-    <h2>글쓰기</h2>
+  <h2>글쓰기</h2>
 
+  <form @submit.prevent="writeVisitor">
     <label for="">제목</label>
     <el-input
       v-model="visitors.title"
-      maxlength="10"
+      maxlength="20"
       placeholder="제목을 입력해주세요"
       show-word-limit
       type="text"
@@ -14,10 +14,12 @@
     <label for="">방명록</label>
     <el-input
       v-model="visitors.content"
-      maxlength="30"
+      maxlength="1000"
       placeholder="방명록을 입력해주세요"
       show-word-limit
       type="textarea"
+      :rows="10"
+      :autosize="{ minRows: 20, maxRows: 200 }"
     />
 
     <label for="text">비밀번호</label>
@@ -79,5 +81,31 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form * {
+  margin-bottom: 10px;
+}
+
+form > div > label {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  background-color: #459efe;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  font-size: 1.2rem;
+}
+</style>
   

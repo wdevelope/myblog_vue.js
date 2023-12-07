@@ -33,9 +33,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-
 .el-main {
-  display: flex;
-  text-align: center;
+  margin: 20px;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent="writeBoard">
-    <h2>글쓰기</h2>
+  <h2>글쓰기</h2>
 
+  <form @submit.prevent="writeBoard">
     <label for="">제목</label>
     <el-input
       v-model="boards.title"
-      maxlength="10"
+      maxlength="20"
       placeholder="제목을 입력해주세요"
       show-word-limit
       type="text"
@@ -14,10 +14,12 @@
     <label for="">내용</label>
     <el-input
       v-model="boards.content"
-      maxlength="30"
+      maxlength="1000"
       placeholder="내용을 입력해주세요"
       show-word-limit
       type="textarea"
+      :rows="10"
+      :autosize="{ minRows: 20, maxRows: 200 }"
     />
 
     <button type="submit" class="submit-button">작성</button>
@@ -71,5 +73,31 @@ export default {
   },
 };
 </script>
-  <style></style>
+<style scoped>
+h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form * {
+  margin-bottom: 10px;
+}
+
+form > div > label {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  background-color: #459efe;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  font-size: 1.2rem;
+}
+</style>
     

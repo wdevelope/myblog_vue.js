@@ -1,55 +1,62 @@
 <template>
-  <div class="adminTitle">
-    <h2>관리자 페이지</h2>
-    <el-tag class="ml-2" type="warning">admin</el-tag>
+  <div class="admin-box">
+    <div class="adminTitle">
+      <h2>관리자 페이지 <el-tag type="warning">admin</el-tag></h2>
+    </div>
+    <!-- 카테고리 생성 폼 -->
+    <div class="adminTitle">
+      <h3>카테고리 생성</h3>
+    </div>
+    <el-form @submit.prevent="createCategory">
+      <el-form-item label="카테고리 이름">
+        <el-input
+          v-model="categoryForm.name"
+          placeholder="카테고리 이름"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="카테고리 위치">
+        <el-input-number
+          v-model="categoryForm.position"
+          :min="1"
+          placeholder="위치"
+        ></el-input-number>
+      </el-form-item>
+      <el-form-item class="admin-form-button">
+        <el-button type="primary" native-type="submit">카테고리 생성</el-button>
+      </el-form-item>
+    </el-form>
+    <br />
+    <!-- 서브카테고리 생성 폼 -->
+    <div class="adminTitle">
+      <h3>서브 카테고리 생성</h3>
+    </div>
+    <el-form @submit.prevent="createSubCategory">
+      <el-form-item label="카테고리 이름">
+        <el-input
+          v-model="subCategoryForm.categoryName"
+          placeholder="카테고리 이름"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="서브카테고리 이름">
+        <el-input
+          v-model="subCategoryForm.name"
+          placeholder="서브카테고리 이름"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="서브카테고리 위치">
+        <el-input-number
+          v-model="subCategoryForm.position"
+          :min="1"
+          placeholder="위치"
+        ></el-input-number>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" native-type="submit"
+          >서브카테고리 생성</el-button
+        >
+      </el-form-item>
+    </el-form>
   </div>
-  <!-- 카테고리 생성 폼 -->
-  <div class="adminTitle">
-    <h3>카테고리 생성</h3>
-  </div>
-  <el-form @submit.prevent="createCategory">
-    <el-form-item label="카테고리 이름">
-      <el-input
-        v-model="categoryForm.name"
-        placeholder="카테고리 이름"
-      ></el-input>
-    </el-form-item>
-    <el-form-item label="카테고리 위치">
-      <el-input-number
-        v-model="categoryForm.position"
-        :min="1"
-        placeholder="위치"
-      ></el-input-number>
-    </el-form-item>
-    <el-button type="primary" native-type="submit">카테고리 생성</el-button>
-  </el-form>
-  <br />
-  <!-- 서브카테고리 생성 폼 -->
-  <div class="adminTitle">
-    <h3>서브 카테고리 생성</h3>
-  </div>
-  <el-form @submit.prevent="createSubCategory">
-    <el-form-item label="카테고리 이름">
-      <el-input
-        v-model="subCategoryForm.categoryName"
-        placeholder="카테고리 이름"
-      ></el-input>
-    </el-form-item>
-    <el-form-item label="서브카테고리 이름">
-      <el-input
-        v-model="subCategoryForm.name"
-        placeholder="서브카테고리 이름"
-      ></el-input>
-    </el-form-item>
-    <el-form-item label="서브카테고리 위치">
-      <el-input-number
-        v-model="subCategoryForm.position"
-        :min="1"
-        placeholder="위치"
-      ></el-input-number>
-    </el-form-item>
-    <el-button type="primary" native-type="submit">서브카테고리 생성</el-button>
-  </el-form>
 </template>
   
   <script>
@@ -116,13 +123,11 @@ h3 {
 h2 {
   margin-bottom: 20px;
 }
-.adminTitle {
-  display: flex;
-  justify-content: space-between;
-}
 
-.el-input {
-  margin: 10px;
+.admin-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 </style>
   
