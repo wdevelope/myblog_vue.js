@@ -55,7 +55,7 @@ export default {
         );
         if (response.status === 201) {
           alert("게시글 작성에 성공했습니다.");
-          this.$router.push("/home");
+          this.$router.go(-1);
         }
       } catch (error) {
         let errorMessage = "게시글 작성에 실패했습니다.";
@@ -98,6 +98,11 @@ form > div > label {
   padding: 10px;
   border: none;
   font-size: 1.2rem;
+}
+
+.submit-button:hover {
+  color: white;
+  background: rgb(72, 72, 254);
 }
 </style>
     

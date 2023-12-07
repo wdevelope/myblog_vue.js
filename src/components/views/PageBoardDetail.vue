@@ -10,6 +10,9 @@
     <template #extra>
       <div class="flex items-center">
         <el-button type="primary" class="ml-2">Edit</el-button>
+        <el-button type="danger" class="ml-2" @click="deletePost"
+          >delete</el-button
+        >
       </div>
     </template>
     <div class="board-content">
@@ -35,6 +38,24 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    async deletePost() {
+      if (confirm("정말로 삭제하시겠습니까?")) {
+        try {
+          const postId = this.$route.params.postId;
+          await axios.delete(
+            `${process.env.VUE_APP_BACKEND_URL}/api/post/${postId}`,
+            {
+              withCredentials: true,
+            }
+          );
+          alert("게시글이 삭제되었습니다.");
+          this.$router.go(-1);
+        } catch (error) {
+          console.error("Error deleting visitor", error);
+          alert("게시글 삭제에 실패했습니다.");
+        }
+      }
     },
   },
   async created() {
@@ -69,5 +90,10 @@ export default {
 
 .el-tag {
   margin-right: 5px;
+}
+
+.board-content {
+  margin: 30px;
+  white-space: pre-wrap;
 }
 </style>

@@ -10,6 +10,9 @@
     <template #extra>
       <div class="flex items-center">
         <el-button type="primary" class="ml-2">Edit</el-button>
+        <el-button type="danger" class="ml-2" @click="deleteVisitor"
+          >delete</el-button
+        >
       </div>
     </template>
     <div class="visitor-content">
@@ -36,6 +39,24 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    async deleteVisitor() {
+      if (confirm("정말로 삭제하시겠습니까?")) {
+        try {
+          const visitorId = this.$route.params.visitorId;
+          await axios.delete(
+            `${process.env.VUE_APP_BACKEND_URL}/api/visitor/${visitorId}`,
+            {
+              withCredentials: true,
+            }
+          );
+          alert("게시글이 삭제되었습니다.");
+          this.$router.go(-1);
+        } catch (error) {
+          console.error("Error deleting visitor", error);
+          alert("게시글 삭제에 실패했습니다.");
+        }
+      }
+    },
   },
   async created() {
     try {
@@ -61,6 +82,7 @@ export default {
 }
 .visitor-content {
   margin: 30px;
+  white-space: pre-wrap;
 }
 
 .el-page-header {

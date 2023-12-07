@@ -107,5 +107,10 @@ form > div > label {
   border: none;
   font-size: 1.2rem;
 }
+
+.submit-button:hover {
+  color: white;
+  background: rgb(72, 72, 254);
+}
 </style>
   

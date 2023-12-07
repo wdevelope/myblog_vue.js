@@ -5,7 +5,7 @@
       <el-header><BasicHeader /></el-header>
       <el-container>
         <!-- 사이드 -->
-        <el-aside width="200px"><BasicAside /></el-aside>
+        <el-aside><BasicAside /></el-aside>
         <el-container class="main-container">
           <!-- 메인 -->
           <el-main> <router-view></router-view> </el-main>
@@ -35,5 +35,11 @@ export default {
 }
 .el-main {
   margin: 20px;
+}
+
+@media (max-width: 768px) {
+  .el-aside {
+    width: 130px !important;
+  }
 }
 </style>
