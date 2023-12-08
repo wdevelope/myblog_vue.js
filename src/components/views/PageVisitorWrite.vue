@@ -47,7 +47,7 @@ export default {
         title: "",
         content: "",
         password: "",
-        isPrivate: "",
+        isPrivate: false,
       },
     };
   },

@@ -37,7 +37,7 @@
         </el-sub-menu>
 
         <!-- 방명록 -->
-        <el-menu-item index="3">
+        <el-menu-item index="visitor">
           <template #title>
             <router-link to="/visitor" class="custom-router-link">
               <el-icon><Avatar /></el-icon>Visitor

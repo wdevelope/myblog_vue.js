@@ -11,6 +11,7 @@
     </el-table-column>
     <el-table-column label="제목">
       <template #default="{ row }">
+        <span v-if="row.isPrivate">🔒</span>
         <router-link :to="`/visitor/${row.id}`">{{ row.title }}</router-link>
       </template>
     </el-table-column>
