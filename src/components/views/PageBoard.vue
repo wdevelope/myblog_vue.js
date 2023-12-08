@@ -12,7 +12,11 @@
     </el-table-column>
     <el-table-column label="제목">
       <template #default="{ row }">
-        <router-link :to="`/post/${row.id}`">{{ row.title }}</router-link>
+        <router-link
+          :to="`/post/${row.id}`"
+          @click="BoardViewRequest(row.id)"
+          >{{ row.title }}</router-link
+        >
       </template>
     </el-table-column>
     <el-table-column prop="user.name" label="작성자" width="100" />
@@ -85,6 +89,16 @@ export default {
         this.totalCount = response.data.meta.totalCount;
       } catch (error) {
         console.error("Error fetching posts", error);
+      }
+    },
+    // api 요청 : 조회수
+    async BoardViewRequest(postId) {
+      try {
+        await axios.post(
+          `${process.env.VUE_APP_BACKEND_URL}/api/view/post/${postId}`
+        );
+      } catch (error) {
+        console.error("Error sending view request", error);
       }
     },
     // 날짜 데이터

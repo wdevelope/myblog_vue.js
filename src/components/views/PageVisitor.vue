@@ -12,7 +12,11 @@
     <el-table-column label="제목">
       <template #default="{ row }">
         <span v-if="row.isPrivate">🔒</span>
-        <router-link :to="`/visitor/${row.id}`">{{ row.title }}</router-link>
+        <router-link
+          :to="`/visitor/${row.id}`"
+          @click="visitorViewRequest(row.id)"
+          >{{ row.title }}</router-link
+        >
       </template>
     </el-table-column>
     <el-table-column prop="user.name" label="작성자" width="100" />
@@ -75,7 +79,16 @@ export default {
         console.error("Error fetching visitors", error);
       }
     },
-
+    // api 요청 : 조회수
+    async visitorViewRequest(visitorId) {
+      try {
+        await axios.post(
+          `${process.env.VUE_APP_BACKEND_URL}/api/view/visitor/${visitorId}`
+        );
+      } catch (error) {
+        console.error("Error sending view request", error);
+      }
+    },
     // 페이지 변경
     changePage(page) {
       this.currentPage = page;
