@@ -9,14 +9,27 @@
     </template>
     <template #extra>
       <div class="flex items-center">
-        <el-button type="primary" class="ml-2">Edit</el-button>
+        <el-button type="primary" class="ml-2" @click="editContent"
+          >Edit</el-button
+        >
         <el-button type="danger" class="ml-2" @click="deletePost"
           >delete</el-button
         >
       </div>
     </template>
-    <div class="board-content">
+    <div class="board-content" v-if="!editing">
       {{ content }}
+    </div>
+    <div v-else>
+      <el-input
+        type="textarea"
+        v-model="editableContent"
+        rows="4"
+        placeholder="Please input your content"
+      ></el-input>
+      <el-button type="success" @click="patchPost" class="edit-button-board"
+        >Save</el-button
+      >
     </div>
   </el-page-header>
 </template>
@@ -33,12 +46,42 @@ export default {
       content: "",
       author: "",
       createdAt: "",
+      editing: false,
+      editableContent: "",
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
+    editContent() {
+      this.editableContent = this.content; // 현재 내용을 편집 가능한 내용으로 설정
+      this.editing = true;
+    },
+    // api 요청 : 게시글 수정
+    async patchPost() {
+      try {
+        const postId = this.$route.params.postId;
+        await axios.patch(
+          `${process.env.VUE_APP_BACKEND_URL}/api/post/${postId}`,
+          {
+            content: this.editableContent,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        this.content = this.editableContent;
+        this.editing = false;
+        alert("게시글 수정 완료.");
+      } catch (error) {
+        console.error("게시글 수정 서버에러", error);
+        alert("게시글 수정 권한이 없습니다.");
+      }
+      this.content = this.editableContent;
+      this.editing = false;
+    },
+    // api 요청 : 게시글 삭제
     async deletePost() {
       if (confirm("정말로 삭제하시겠습니까?")) {
         try {
@@ -58,6 +101,7 @@ export default {
       }
     },
   },
+  // api 요청 : 게시글 랜더링
   async created() {
     try {
       const postId = this.$route.params.postId;
@@ -95,5 +139,9 @@ export default {
 .board-content {
   margin: 30px;
   white-space: pre-wrap;
+}
+
+.edit-button-board {
+  margin-top: 7px;
 }
 </style>
