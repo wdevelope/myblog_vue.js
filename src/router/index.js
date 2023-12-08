@@ -13,8 +13,13 @@ import PageBoardWrite from '../components/views/PageBoardWrite.vue';
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
+    component: PageHome,
+  },
+  {
+    path: '/home',
+    name: 'home',
     component: PageHome,
   },
   {
