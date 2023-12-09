@@ -59,7 +59,11 @@ export default {
           await this.visitorPasswordCheck(row.id, password);
         }
       } else {
-        await this.visitorViewRequest(row.id);
+        const visitorCookie = this.getCookie(`visitorViewed_${row.id}`);
+        if (!visitorCookie) {
+          await this.visitorViewRequest(row.id);
+          this.setCookie(`visitorViewed_${row.id}`, "viewed", 1); // 1일 동안 유효
+        }
         this.$router.push(`/visitor/${row.id}`);
       }
     },
@@ -82,6 +86,7 @@ export default {
           `${process.env.VUE_APP_BACKEND_URL}/api/visitor/${visitorId}/password`,
           { password }
         );
+        this.visitorViewRequest(visitorId);
         this.$router.push(`/visitor/${visitorId}`);
       } catch (error) {
         console.error("Error sending view request", error);
@@ -127,6 +132,30 @@ export default {
     // 게시글 번호 index 계산
     calculateIndex(index) {
       return this.totalCount - (this.currentPage - 1) * 15 - index;
+    },
+
+    // 쿠키 설정
+    setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    },
+
+    // 쿠키 가져오기
+    getCookie(name) {
+      let nameEQ = name + "=";
+      let ca = document.cookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+          return c.substring(nameEQ.length, c.length);
+      }
+      return null;
     },
   },
   // 실시간 변경 감지

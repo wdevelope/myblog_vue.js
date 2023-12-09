@@ -93,12 +93,16 @@ export default {
     },
     // api 요청 : 조회수
     async BoardViewRequest(postId) {
-      try {
-        await axios.post(
-          `${process.env.VUE_APP_BACKEND_URL}/api/view/post/${postId}`
-        );
-      } catch (error) {
-        console.error("Error sending view request", error);
+      const viewedCookie = this.getCookie(`postViewed_${postId}`);
+      if (!viewedCookie) {
+        try {
+          await axios.post(
+            `${process.env.VUE_APP_BACKEND_URL}/api/view/post/${postId}`
+          );
+          this.setCookie(`postViewed_${postId}`, "viewed", 1); // 1일 동안 유효
+        } catch (error) {
+          console.error("Error sending view request", error);
+        }
       }
     },
     // 날짜 데이터
@@ -123,6 +127,30 @@ export default {
     // 게시글 번호 index 계산
     calculateIndex(index) {
       return this.totalCount - (this.currentPage - 1) * 15 - index;
+    },
+
+    // 쿠키 설정
+    setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    },
+
+    // 쿠키 가져오기
+    getCookie(name) {
+      let nameEQ = name + "=";
+      let ca = document.cookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+          return c.substring(nameEQ.length, c.length);
+      }
+      return null;
     },
   },
 };
