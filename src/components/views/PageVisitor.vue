@@ -12,11 +12,7 @@
     <el-table-column label="제목">
       <template #default="{ row }">
         <span v-if="row.isPrivate">🔒</span>
-        <router-link
-          :to="`/visitor/${row.id}`"
-          @click="visitorViewRequest(row.id)"
-          >{{ row.title }}</router-link
-        >
+        <a @click.prevent="handleClick(row)">{{ row.title }}</a>
       </template>
     </el-table-column>
     <el-table-column prop="user.name" label="작성자" width="100" />
@@ -55,13 +51,51 @@ export default {
     };
   },
   methods: {
+    // 방명록 제목 클릭 이벤트
+    async handleClick(row) {
+      if (row.isPrivate) {
+        const password = prompt("비밀번호를 입력하세요.");
+        if (password) {
+          await this.visitorPasswordCheck(row.id, password);
+        }
+      } else {
+        await this.visitorViewRequest(row.id);
+        this.$router.push(`/visitor/${row.id}`);
+      }
+    },
+
+    // api 요청 : 조회수
+    async visitorViewRequest(visitorId) {
+      try {
+        await axios.post(
+          `${process.env.VUE_APP_BACKEND_URL}/api/view/visitor/${visitorId}`
+        );
+      } catch (error) {
+        console.error("Error sending view request", error);
+      }
+    },
+
+    // api 요청 : 비밀번호 체크
+    async visitorPasswordCheck(visitorId, password) {
+      try {
+        await axios.post(
+          `${process.env.VUE_APP_BACKEND_URL}/api/visitor/${visitorId}/password`,
+          { password }
+        );
+        this.$router.push(`/visitor/${visitorId}`);
+      } catch (error) {
+        console.error("Error sending view request", error);
+        alert("비밀번호가 틀렸습니다.");
+      }
+    },
+
     // 날짜 설정
     formatDate(row, column) {
       const date = new Date(row[column.property]);
       return date.toLocaleDateString();
     },
 
-    // 방명록 상세 페이지 이동
+    // 방명록 글쓰기 페이지로 이동
     goToWritePage() {
       this.$router.push("/visitor/write"); // 글쓰기 페이지로 이동
     },
@@ -79,16 +113,7 @@ export default {
         console.error("Error fetching visitors", error);
       }
     },
-    // api 요청 : 조회수
-    async visitorViewRequest(visitorId) {
-      try {
-        await axios.post(
-          `${process.env.VUE_APP_BACKEND_URL}/api/view/visitor/${visitorId}`
-        );
-      } catch (error) {
-        console.error("Error sending view request", error);
-      }
-    },
+
     // 페이지 변경
     changePage(page) {
       this.currentPage = page;
@@ -133,5 +158,14 @@ h2 {
 .visitorTitle {
   display: flex;
   justify-content: space-between;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
 }
 </style>

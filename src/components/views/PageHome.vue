@@ -11,8 +11,8 @@
       <el-icon><ReadingLamp />&nbsp;</el-icon>study
     </h3>
     <ul>
-      <li><strong>vue.js:</strong> vue.js 학습 정리 자료입니다.</li>
-      <li><strong>node.js:</strong> node.js 학습 정리 자료입니다.</li>
+      <li><strong>frontend:</strong> frontend 학습 정리 자료입니다.</li>
+      <li><strong>backend:</strong> node.js 학습 정리 자료입니다.</li>
       <li><strong>server:</strong> 서버 학습 정리 자료입니다.</li>
       <li><strong>ioT:</strong> 사물인터넷 학습 정리 자료입니다.</li>
     </ul>
