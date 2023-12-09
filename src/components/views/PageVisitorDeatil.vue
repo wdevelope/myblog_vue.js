@@ -20,6 +20,7 @@
     <div class="visitor-content" v-if="!editing">
       {{ content }}
     </div>
+
     <div v-else>
       <el-input
         type="textarea"
@@ -31,11 +32,24 @@
         >Save</el-button
       >
     </div>
+
+    <!-- 댓글 표시 영역 -->
+    <div class="visitor-comments">
+      <h3>댓글</h3>
+      <div
+        v-for="comment in visitorComments"
+        :key="comment.name"
+        class="visitor-comment"
+      >
+        <span><el-tag>admin</el-tag>{{ comment.name }}</span>
+        <p>{{ comment.comment }}</p>
+      </div>
+    </div>
   </el-page-header>
 </template>
   
   
-  <script>
+<script>
 import axios from "axios";
 
 export default {
@@ -48,6 +62,7 @@ export default {
       createdAt: "",
       editing: false,
       editableContent: "",
+      visitorComments: [],
     };
   },
   methods: {
@@ -101,12 +116,14 @@ export default {
       }
     },
   },
+  // api 요청 : 방명록 렌더링
   async created() {
     try {
       const visitorId = this.$route.params.visitorId;
       const response = await axios.get(
         `${process.env.VUE_APP_BACKEND_URL}/api/visitor/${visitorId}`
       );
+      this.visitorComments = response.data.visitorComments;
       this.title = response.data.title;
       this.content = response.data.content;
       this.author = response.data.user.name;
@@ -138,5 +155,22 @@ export default {
 
 .edit-button {
   margin-top: 7px;
+}
+.visitor-comments {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.visitor-comments > h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.visitor-comments > div > p {
+  margin: 10px;
+}
+
+.visitor-comments > div > span {
+  font-weight: bold;
+  margin-left: 3px;
 }
 </style>
