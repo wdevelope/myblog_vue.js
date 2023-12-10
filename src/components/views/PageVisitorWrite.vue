@@ -5,7 +5,7 @@
     <label for="">제목</label>
     <el-input
       v-model="visitors.title"
-      maxlength="20"
+      maxlength="30"
       placeholder="제목을 입력해주세요"
       show-word-limit
       type="text"
@@ -14,7 +14,7 @@
     <label for="">방명록</label>
     <el-input
       v-model="visitors.content"
-      maxlength="1000"
+      maxlength="500"
       placeholder="방명록을 입력해주세요"
       show-word-limit
       type="textarea"
