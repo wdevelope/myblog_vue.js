@@ -37,6 +37,10 @@ export default {
     // 로그인 상태 확인 (쿠키)
     async checkLoginStatus() {
       try {
+        if (!this.isLoggedIn()) {
+          return; // 로그인하지 않은 상태라면 함수 종료
+        }
+
         await axios.get(
           `${process.env.VUE_APP_BACKEND_URL}/api/user/check`,
           // 쿠키 사용 설정
@@ -46,7 +50,7 @@ export default {
         );
         this.$store.dispatch("login");
       } catch (error) {
-        console.error("Error checking login status", error);
+        console.log("미로그인 상태");
       }
     },
     // 로그아웃

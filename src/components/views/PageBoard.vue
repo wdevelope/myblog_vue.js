@@ -55,12 +55,14 @@ export default {
         pageSize: 15,
       },
       subCategoryName: "",
+      status: "",
     };
   },
   created() {
     const pageFromUrl = this.$route.query.page || 1;
     this.currentPage = Number(pageFromUrl);
     this.fetchPosts(this.$route.params.subCategoryId);
+    this.checkAdminStatus();
   },
   // 페이지 변경 감시
   watch: {
@@ -91,6 +93,26 @@ export default {
         console.error("Error fetching posts", error);
       }
     },
+    // api 요청: 유저 상태 확인
+    async checkAdminStatus() {
+      if (!this.getCookie("Authorization")) {
+        return; // 쿠키가 없으면 함수 종료
+      }
+
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_BACKEND_URL}/api/user/userInfo`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(this.status);
+        this.status = response.data.status;
+      } catch (error) {
+        console.log("미로그인 상태");
+      }
+    },
+
     // api 요청 : 조회수
     async BoardViewRequest(postId) {
       const viewedCookie = this.getCookie(`postViewed_${postId}`);
@@ -112,6 +134,11 @@ export default {
     },
     // 상세페이지 이동
     goToWritePage() {
+      if (this.status !== "admin") {
+        alert("권한이 없습니다.");
+        return;
+      }
+
       const subCategoryId = this.$route.params.subCategoryId;
       this.$router.push({ path: "/board/write", query: { subCategoryId } });
     },

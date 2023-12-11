@@ -47,6 +47,7 @@ export default {
         totalPages: 0,
         currentPage: 1,
         totalCount: 0,
+        status: "",
       },
     };
   },
@@ -79,6 +80,25 @@ export default {
       }
     },
 
+    // api 요청: 유저 상태 확인
+    async checkAdminStatus() {
+      if (!this.getCookie("authToken")) {
+        return; // 쿠키가 없으면 함수 종료
+      }
+
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_BACKEND_URL}/api/user/userInfo`,
+          {
+            withCredentials: true,
+          }
+        );
+        this.status = response.data.status;
+      } catch (error) {
+        console.log("미로그인 상태");
+      }
+    },
+
     // api 요청 : 비밀번호 체크
     async visitorPasswordCheck(visitorId, password) {
       try {
@@ -102,6 +122,11 @@ export default {
 
     // 방명록 글쓰기 페이지로 이동
     goToWritePage() {
+      if (this.status !== "user") {
+        alert("로그인을 해주세요.");
+        return;
+      }
+
       this.$router.push("/visitor/write"); // 글쓰기 페이지로 이동
     },
 
@@ -169,6 +194,7 @@ export default {
     const pageFromUrl = this.$route.query.page || 1;
     this.currentPage = Number(pageFromUrl);
     this.fetchVisitors(this.currentPage);
+    this.checkAdminStatus();
   },
 };
 </script>
