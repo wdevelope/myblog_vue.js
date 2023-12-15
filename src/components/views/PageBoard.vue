@@ -69,18 +69,26 @@ export default {
     "$route.params.subCategoryId": {
       immediate: true,
       handler(newVal) {
-        this.fetchPosts(newVal);
+        if (newVal) {
+          // newVal이 유효한 값일 때만 fetchPosts 호출
+          this.fetchPosts(newVal);
+        }
       },
     },
     "$route.query.page": function (newPage) {
       this.currentPage = Number(newPage) || 1;
-      this.fetchPosts(this.$route.params.subCategoryId);
+      if (this.$route.params.subCategoryId) {
+        // subCategoryId가 유효한 값일 때만 fetchPosts 호출
+        this.fetchPosts(this.$route.params.subCategoryId);
+      }
     },
   },
   methods: {
     // api 요청 : 게시판 렌더링
     async fetchPosts(subCategoryId) {
       try {
+        if (!subCategoryId) return;
+
         const pageFromUrl = this.$route.query.page || 1;
         const response = await axios.get(
           `${process.env.VUE_APP_BACKEND_URL}/api/post?page=${pageFromUrl}&subCategoryId=${subCategoryId}`
