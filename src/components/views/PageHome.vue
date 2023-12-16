@@ -11,8 +11,7 @@
       <el-icon><ReadingLamp />&nbsp;</el-icon>study
     </h3>
     <ul>
-      <li><strong>frontend:</strong> frontend 학습 정리 자료입니다.</li>
-      <li><strong>backend:</strong> node.js 학습 정리 자료입니다.</li>
+      <li><strong>web:</strong> 웹개발 학습 정리 자료입니다.</li>
       <li><strong>server:</strong> 서버 학습 정리 자료입니다.</li>
       <li><strong>ioT:</strong> 사물인터넷 학습 정리 자료입니다.</li>
     </ul>
@@ -21,7 +20,7 @@
       <el-icon><Ship />&nbsp;</el-icon>Life
     </h3>
     <ul>
-      <li><strong>busan 2023~ :</strong> 현재 부산생활 소소한일기입니다.</li>
+      <li><strong>2023 :</strong> 소소한일기입니다.</li>
     </ul>
     <br />
     <h3>
