@@ -17,10 +17,24 @@
     </ul>
     <br />
     <h3>
+      <el-icon><Ship />&nbsp;</el-icon>hobby
+    </h3>
+    <ul>
+      <li><strong>헬스 :</strong> 헬스 일기입니다.</li>
+    </ul>
+    <br />
+    <h3>
       <el-icon><Ship />&nbsp;</el-icon>Life
     </h3>
     <ul>
-      <li><strong>2023 :</strong> 소소한일기입니다.</li>
+      <li><strong>2023 :</strong> 소소한 일기입니다.</li>
+    </ul>
+    <br />
+    <h3>
+      <el-icon><Ship />&nbsp;</el-icon>version
+    </h3>
+    <ul>
+      <li>블로그 개선 버전관리입니다.</li>
     </ul>
     <br />
     <h3>
